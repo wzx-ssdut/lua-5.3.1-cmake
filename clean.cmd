@@ -5,19 +5,9 @@ if exist build (
 	rd /s /q build
 )
 
-if exist bin (
+if exist putput (
 	echo remove directory: bin
 	rd /s /q bin
-)
-
-if exist lib (
-	echo remove directory: lib
-	rd /s /q lib
-)
-
-if exist include (
-	echo remove directory: include
-	rd /s /q include
 )
 
 pause

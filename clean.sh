@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a dirs=(build bin lib include)
+declare -a dirs=(build output)
 
 for dir in ${dirs[*]}; do
     echo "Remove directory: $dir"
