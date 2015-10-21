@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.3)
 project(lua-5.3.1)
 
 set(LUA_ROOT "${CMAKE_SOURCE_DIR}")
+set(OUTPUT_ROOT "${LUA_ROOT}/output")
 
 set(LUA_HEADER
 	src/lapi.h
@@ -74,9 +75,9 @@ if(MSVC)
 endif()
 
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${LUA_ROOT}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LUA_ROOT}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LUA_ROOT}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_ROOT}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_ROOT}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_ROOT}/lib)
 
 
 add_library(lualib STATIC
@@ -89,11 +90,11 @@ endif()
 set_target_properties(lualib PROPERTIES OUTPUT_NAME lua)
 add_custom_target(lualib_prebuild ALL)
 add_custom_command(TARGET lualib_prebuild PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lua.h ${LUA_ROOT}/include/lua.h
-	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/luaconf.h ${LUA_ROOT}/include/luaconf.h
-	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lualib.h ${LUA_ROOT}/include/lualib.h
-	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lauxlib.h ${LUA_ROOT}/include/lauxlib.h
-	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lua.hpp ${LUA_ROOT}/include/lua.hpp
+	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lua.h ${OUTPUT_ROOT}/include/lua.h
+    COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/luaconf.h ${OUTPUT_ROOT}/include/luaconf.h
+	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lualib.h ${OUTPUT_ROOT}/include/lualib.h
+	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lauxlib.h ${OUTPUT_ROOT}/include/lauxlib.h
+	COMMAND ${CMAKE_COMMAND} -E copy ${LUA_ROOT}/src/lua.hpp ${OUTPUT_ROOT}/include/lua.hpp
 	COMMENT "Copy lua public headers to include directory."
 )
 add_custom_target(lualib_core_prebuild)
